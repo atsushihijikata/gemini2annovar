@@ -1,8 +1,14 @@
+#!/usr/bin/env python3
+'''
+    @author: Atsushi Hijikata
+    @created: Sep. 1, 2017
+    @version: 0.1
+'''
 import os, sys
 
 VERSION='0.1'
 
-def to_annovar(data):
+def gemini_to_annovar(data):
     chrom, start, end, ref, alt = data
     if len(ref) == len(alt): # SNV or MNV:
         return chrom, start, end, ref, alt
@@ -28,7 +34,7 @@ def main():
         if line.startswith('#') or line.startswith('chr'):
             continue
         cols = line.split('\t')
-        chrom, start, end, ref, alt = to_annovar(cols[0:5])
+        chrom, start, end, ref, alt = gemini_to_annovar(cols[0:5])
         print("\t".join([chrom, start, end, ref, alt, "\t".join(cols[5:])]))
 
 
